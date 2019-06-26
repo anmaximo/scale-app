@@ -13,7 +13,6 @@ const sequelize = new Sequelize(config.development.database, config.development.
     dialect: config.development.dialect,
 });
 
-
 /* for pug, front end stuff */
 app.set('views', './views');
 app.set('view engine', 'pug');
@@ -52,8 +51,7 @@ app.get('/profile', function(req,res) {
 });
 
 app.post('/profile', function(req,res) {
-    const student_ = Student.build({
-        
+    const student_ = Student.build({   
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         student_number: req.body.student_number,
@@ -65,6 +63,30 @@ app.post('/profile', function(req,res) {
     student_.save()
         .then(function(savedStudent) {
             return res.redirect('/profile');
+        })
+        .catch(function(err) { res.status(400).send({ error: err.message }) });
+});
+
+app.get('/profile', function(req,res) {
+    Student.findByPk(req.params.id)
+        .then(function(student_) {
+            return res.render('student_profile', { student_ });
+        })
+        .catch(function(err) { res.status(400).send({ error: err.message }) });
+});
+
+app.put('/profile', function(req,res) {
+    Student.findByPk(req.params.id)
+        .then(function(student_) {
+            student_.first_name = req.body.first_name;
+            student_.last_name = req.body.last_name;
+            student_.username = req.body.username;
+            student_.password = req.body.password;
+
+            return student_.save();
+        })
+        .then(function(savedStudent) {
+            return res.redirect('/users');
         })
         .catch(function(err) { res.status(400).send({ error: err.message }) });
 });

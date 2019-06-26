@@ -123,41 +123,42 @@ html
       padding:0 10px 10px 10px;
       }
   body
-    each student_ in students
-      .top
-        img(src='pics/logo.png')
-        .column
+    .top
+      img(src='pics/logo.png')
+      .column
+        each student_ in students
           p(style='margin-bottom: -35px; margin-top: 25px;') #{student_.first_name} #{student_.last_name} #{student_.student_number}
-          p PROGRESS: 
-        a.right(href='/login') LOG OUT
-      .bottom
-        .create
-          h2.title CREATE AN EVENT
+        p PROGRESS: 
+      a.right(href='/login') LOG OUT
+    .bottom
+      .create
+        h2.title CREATE AN EVENT
+        .row
+          p STRAND
+          input(type='radio')
+          p  S 
+          input(type='radio')
+          p  C 
+          input(type='radio')
+          p  A 
+        .row
+          input(type='text', placeholder='NAME of EVENT')
+        .row
+          textarea(placeholder='Write a Description of your event')
+        button CREATE EVENT
+      .approved
+        h2.title APPROVED EVENTS
+        .approved_event
           .row
-            p STRAND
-            input(type='radio')
-            p  S 
-            input(type='radio')
-            p  C 
-            input(type='radio')
-            p  A 
-          .row
-            input(type='text', placeholder='NAME of EVENT')
-          .row
-            textarea(placeholder='Write a Description of your event')
-          button CREATE EVENT
-        .approved
-          h2.title APPROVED EVENTS
-          .approved_event
-            .row
+            each student_ in students
               p #{student_.first_name} #{student_.last_name}
-            .row
-              p(style='margin-top: -10px') RED DAY
-            p
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              | tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              | quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              | consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              | cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              | proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            button JOIN EVENT
+          .row
+            p(style='margin-top: -10px') RED DAY
+          p
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            | tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            | quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            | consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            | cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            | proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          button JOIN EVENT
