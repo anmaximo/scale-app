@@ -2,7 +2,7 @@ doctype html
 html
   head
     title SCALE | Sign UP
-    style.
+    style(type='text/css').
       body
       {
       height: 649px;
@@ -56,19 +56,56 @@ html
       input.button{
       background-color: rgb(0,66,58)
       }
+      .hey
+      {
+      padding: auto;
+      display: flex;
+      flex-direction: row;
+      width: 270px;
+      margin-top: 17.5px;
+      height: 45px;
+      margin-left: 75px;
+      }
+      select
+      {
+      width: 175px;
+      background-color: rgba(0,66,58,.72);
+      outline: none;
+      color: white;
+      text-align: center;
+      border:none;
+      }
+      label
+      {
+      padding-top: 8px;
+      width: 105px;
+      background-color: rgba(0,66,58,.72);
+      outline: none;
+      color: white;
+      text-align: center;
+      border:none;
+      }
   body
     .main
       .left
-        img(src='pics/side.png')
+        img(src="./views/pics/side.png")
       .right
-        form.form(method="POST", action="/profile")
-          input(placeholder='FIRSTNAME')
-          input(placeholder='LASTSTNAME')
-          input(placeholder='STUDENT ID')
-          input(placeholder='TEACHER')
-          input(placeholder='USERNAME')
-          input(placeholder='PASSWORD')
+        form(method="POST",action="/profile")
+          input(type="text", placeholder='FIRSTNAME', name="first_name")
+          input(type="text", placeholder='LASTNAME', name="last_name")
+          input(type="text", placeholder='STUDENT ID', name="student_number")
+          .hey
+            label  TEACHER 
+            select(name="teacher_id")
+              option(value='1') Beberly Del Rosario
+              option(value='2') Ricky Oropesa
+              option(value='3') Francis Barrio
+              option(value='4') Mark Anthony Del Rosario
+              option(value='5') Alpha Rowena Pimentel
+              option(value='6') Aileen Pesino
+          input(type="text", name="username", placeholder='USERNAME')
+          input(type="text", name="password", placeholder='PASSWORD')
           p
             | Already have an account?
-            a(href='index.pug') Click Here
+            a(href='/login') Click Here
           input.button(type='submit', value='SUBMIT', style='margin-top: auto')

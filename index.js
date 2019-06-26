@@ -1,5 +1,6 @@
 const express=require('express');
 const Sequelize = require('sequelize');
+const session=require('express-session'); /* for log in */
 const bodyParser = require('body-parser'); /* need for form submission */
 const methodOverride = require('method-override'); /* di ko alam ginagawa nito pero kailangan siya so... */
 const config = require('./config/config.json'); /* dapat tama or else code is br0ken */
@@ -12,11 +13,17 @@ const sequelize = new Sequelize(config.development.database, config.development.
     dialect: config.development.dialect,
 });
 
+
 /* for pug, front end stuff */
 app.set('views', './views');
 app.set('view engine', 'pug');
 
 /* used for form submission */
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -46,8 +53,13 @@ app.get('/profile', function(req,res) {
 
 app.post('/profile', function(req,res) {
     const student_ = Student.build({
+        
         first_name: req.body.first_name,
-        last_name: req.body.last_name
+        last_name: req.body.last_name,
+        student_number: req.body.student_number,
+        teacher_id: req.body.teacher_id,
+        username: req.body.username,
+        password: req.body.password
     });
 
     student_.save()
@@ -57,6 +69,64 @@ app.post('/profile', function(req,res) {
         .catch(function(err) { res.status(400).send({ error: err.message }) });
 });
 
+/* log in code */
+app.get('/profile/:id', function(req, res) {
+    const username = req.body.username;
+    const password = req.body.password;
+    if (username && password) {
+        connection.query('SELECT * FROM students WHERE id = ? username = ? AND password = ?', [id, username, password], function(error, results, fields) {
+            if (results.length > 0) {
+                req.session.loggedin = true;
+                req.session.id=id;
+                req.session.username = username;
+                res.redirect('/profile');
+            } else {
+                res.send('Incorrect Username and/or Password!');
+            }           
+            res.end();
+        });
+    } else {
+        res.send('Please enter Username and Password!');
+        res.end();
+    }
+});
+
+/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
 /* renders form, new user create */
 app.get('/users/new', function(req,res) {
     return res.render('newUser');
@@ -76,6 +146,8 @@ app.put('/users/:id', function(req,res) {
         .then(function(teacher_) {
             teacher_.first_name = req.body.first_name;
             teacher_.last_name = req.body.last_name;
+            teacher_.username = req.body.username;
+            teacher_.password = req.body.password;
 
             return teacher_.save();
         })
@@ -110,7 +182,9 @@ app.get('/users', function(req,res) {
 app.post('/users', function(req,res) {
     const teacher_ = Teacher.build({
         first_name: req.body.first_name,
-        last_name: req.body.last_name
+        last_name: req.body.last_name,
+        username:req.body.username,
+        password: req.body.password
     });
 
     teacher_.save()

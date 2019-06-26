@@ -46,9 +46,9 @@ html
       #col1.column
         center
           img(src='pics/tao.png', height='130px', style='margin-top: 45px;')
-          form
-            input(placeholder='USERNAME')
-            input(placeholder='PASSWORD')
+          form(method="POST" action=`/profile/${student_.id}?_method=GET`)
+            input(placeholder='USERNAME' name="username")
+            input(placeholder='PASSWORD' name="password")
             p
               | Don't have an account?
               a(href='/signup') Click Here
