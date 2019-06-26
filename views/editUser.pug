@@ -1,0 +1,18 @@
+extends master.pug
+
+block content
+  div.container
+    h1.title Edit User
+
+    form(method="POST", action=`/users/${teacher_.id}?_method=PUT`)
+      div.field
+        label.label First Name
+        div.control
+          input.input(type="text", placeholder="John", name="first_name", value= teacher_.first_name)
+
+      div.field
+        label.label Last Name
+        div.control
+          input.input(type="text", placeholder="Doe", name="last_name", value= teacher_.last_name)
+
+      button.button(type="submit") Submit

@@ -1,0 +1,25 @@
+extends master.pug
+
+block content
+  div.container
+    h1.title Users
+
+    a.button.is-pulled-right(href="/users/new") Add
+
+    table.table.is-fullwidth
+      thead
+        tr
+          th ID
+          th First Name
+          th Last Name
+          th Actions
+      tbody
+        each teacher_ in teachers
+          tr
+            td= teacher_.id
+            td= teacher_.first_name
+            td= teacher_.last_name
+            td
+              a(href=`/users/${teacher_.id}`) Edit
+              ||
+              a(href=`/users/${teacher_.id}/delete`) Delete

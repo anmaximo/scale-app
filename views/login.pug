@@ -1,0 +1,55 @@
+doctype html
+html
+  head
+    title SCALE | LOGIN
+    style.
+      body{
+      height: 649px;
+      background: -webkit-linear-gradient(left top, rgb(255,255,255) 0%,rgb(2,254,254) 20%, rgb(1,201,177) 40%, rgb(0,66,55) 100%);
+      background: -o-linear-gradient(bottom right, rgb(255,255,255) 0%,rgb(2,254,254) 20%, rgb(1,201,177) 40%, rgb(0,66,55) 100%);
+      background: -moz-linear-gradient(bottom right, rgb(255,255,255) 0%,rgb(2,254,254) 20%, rgb(1,201,177) 40%, rgb(0,66,55) 100%);
+      background: linear-gradient(to bottom right, rgb(255,255,255) 0%,rgb(2,254,254) 20%, rgb(1,201,177) 40%, rgb(0,66,55) 100%);
+      }
+      .column{
+      height:500px;
+      width: 420px;
+      }
+      #col1{
+      background-color: white;
+      }
+      .row {
+      display: flex;
+      flex-direction: row;
+      margin: 75px 0 0 250px;
+      }
+      input{
+      width: 270px;
+      margin-top: 30px;
+      height: 45px;
+      background-color: rgba(0,66,58,.72);
+      outline: none;
+      color: white;
+      text-align: center;
+      border:none;
+      }
+      ::placeholder{
+      color: white;
+      text-align: center;
+      }
+      .button{
+      background-color: rgb(0,66,58)
+      }
+  body
+    .row
+      .column
+        img(src='pics/side.png', height='500px', width='420px')
+      #col1.column
+        center
+          img(src='pics/tao.png', height='130px', style='margin-top: 45px;')
+          form
+            input(placeholder='USERNAME')
+            input(placeholder='PASSWORD')
+            p
+              | Don't have an account?
+              a(href='/signup') Click Here
+            input.button(type='submit', value='LOGIN', style='margin-top: auto')
