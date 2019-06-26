@@ -42,16 +42,17 @@ app.get('/login', function(req,res) {
 });
 
 /* after sign up */
-app.get('/profile', function(req,res) {
-    Student.findAll()
+app.get('/profile/:username', function(req,res) {
+    Student.findOne({where: {username: req.params.username}})
         .then(function(students) {
-            return res.render('student_profile', { students })
+            console.log(students.toJSON());
+            return res.render('student_profile', { students:students.toJSON() })
         })
         .catch(function(err) { console.log(err) });
 });
 
 app.post('/profile', function(req,res) {
-    const student_ = Student.build({   
+    const student_ = Student.build({  
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         student_number: req.body.student_number,
@@ -62,15 +63,7 @@ app.post('/profile', function(req,res) {
 
     student_.save()
         .then(function(savedStudent) {
-            return res.redirect('/profile');
-        })
-        .catch(function(err) { res.status(400).send({ error: err.message }) });
-});
-
-app.get('/profile', function(req,res) {
-    Student.findByPk(req.params.id)
-        .then(function(student_) {
-            return res.render('student_profile', { student_ });
+            return res.redirect(`/profile/${req.body.username}`);
         })
         .catch(function(err) { res.status(400).send({ error: err.message }) });
 });
@@ -82,17 +75,16 @@ app.put('/profile', function(req,res) {
             student_.last_name = req.body.last_name;
             student_.username = req.body.username;
             student_.password = req.body.password;
-
             return student_.save();
         })
         .then(function(savedStudent) {
-            return res.redirect('/users');
+            return res.redirect('/login');
         })
         .catch(function(err) { res.status(400).send({ error: err.message }) });
 });
 
 /* log in code */
-app.get('/profile/:id', function(req, res) {
+/*app.get('/profile/:id', function(req, res) {
     const username = req.body.username;
     const password = req.body.password;
     if (username && password) {

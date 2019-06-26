@@ -5,7 +5,7 @@ html
     style(type='text/css').
       body
       {
-      background-image: url('pics/background.jpg');
+      background-image: url('public/pics/background.jpg');
       display: flex;
       flex-direction: column;
       font-family: helvetica;
@@ -124,10 +124,9 @@ html
       }
   body
     .top
-      img(src='pics/logo.png')
+      img(src='public/pics/logo.png')
       .column
-        each student_ in students
-          p(style='margin-bottom: -35px; margin-top: 25px;') #{student_.first_name} #{student_.last_name} #{student_.student_number}
+        p(style='margin-bottom: -35px; margin-top: 25px;') #{students.first_name} #{students.last_name} #{students.student_number}
         p PROGRESS: 
       a.right(href='/login') LOG OUT
     .bottom
@@ -150,8 +149,7 @@ html
         h2.title APPROVED EVENTS
         .approved_event
           .row
-            each student_ in students
-              p #{student_.first_name} #{student_.last_name}
+            p #{students.first_name} #{students.last_name}
           .row
             p(style='margin-top: -10px') RED DAY
           p
