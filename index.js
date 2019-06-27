@@ -2,11 +2,11 @@ const express=require('express');
 const Sequelize = require('sequelize');
 const session=require('express-session'); /* for log in */
 const bodyParser = require('body-parser'); /* need for form submission */
-const methodOverride = require('method-override'); /* di ko alam ginagawa nito pero kailangan siya so... */
+const methodOverride = require('method-override'); /* di ko alam ginagawa nito pero kailangan siya so... */ 
 const config = require('./config/config.json'); /* dapat tama or else code is br0ken */
 const PORT=3000; /* sunod sa third */
 const app=express();
-
+const path=require('path');
 /* connect to database */
 const sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {
     host: config.development.host,
@@ -26,10 +26,14 @@ app.use(session({
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
+
 /* i used to be a */
 const models = require('./models/index');
 const Teacher = models.teachers;
 const Student = models.students;
+const Event = models.events;
 
 /* papuntang sign up */
 app.get('/signup', function(req,res) {
@@ -41,12 +45,58 @@ app.get('/login', function(req,res) {
     return res.render('login');
 });
 
+/* papuntang teacher log in */
+app.get('/teacher_login', function(req,res) {
+    return res.render('teacher_login');
+});
+
+app.get('/event1approved', function(req,res) {
+    return res.render('event1approved');
+});
+
+app.get('/event1done', function(req,res) {
+    return res.render('signup');
+});
+
+app.get('/event2approved', function(req,res) {
+    return res.render('signup');
+});
+
+app.get('/event2done', function(req,res) {
+    return res.render('signup');
+});
+
+app.get('/event3approved', function(req,res) {
+    return res.render('signup');
+});
+
+app.get('/event3done', function(req,res) {
+    return res.render('signup');
+});
+
+app.get('/event4approved', function(req,res) {
+    return res.render('signup');
+});
+
+app.get('/event4done', function(req,res) {
+    return res.render('signup');
+});
+
 /* after sign up */
 app.get('/profile/:username', function(req,res) {
     Student.findOne({where: {username: req.params.username}})
         .then(function(students) {
             console.log(students.toJSON());
             return res.render('student_profile', { students:students.toJSON() })
+        })
+        .catch(function(err) { console.log(err) });
+});
+
+app.get('/teacher_profile/:username', function(req,res) {
+    Teacher.findOne({where: {username: req.params.username}})
+        .then(function(teachers) {
+            console.log(teachers.toJSON());
+            return res.render('teacher_profile', { teachers:teachers.toJSON() })
         })
         .catch(function(err) { console.log(err) });
 });
@@ -68,44 +118,43 @@ app.post('/profile', function(req,res) {
         .catch(function(err) { res.status(400).send({ error: err.message }) });
 });
 
-app.put('/profile', function(req,res) {
-    Student.findByPk(req.params.id)
-        .then(function(student_) {
-            student_.first_name = req.body.first_name;
-            student_.last_name = req.body.last_name;
-            student_.username = req.body.username;
-            student_.password = req.body.password;
-            return student_.save();
+/* after create event */
+app.get('/redirect', function(req,res) {
+    Event.findAll()
+        .then(events => {
+            return res.render('redirect_event', { events })
         })
-        .then(function(savedStudent) {
-            return res.redirect('/login');
+        .catch(err => console.log(err));
+});
+
+app.post('/redirect', function(req,res) {
+    const event_ = Event.build({  
+        strand: req.body.strand,
+        name: req.body.name,
+        description: req.body.description,
+        event_date: req.body.date,
+        number_of_participants: req.body.number_of_participants
+    });
+
+    event_.save()
+        .then(function(savedEvent) {
+            return res.redirect(`/redirect`);
         })
         .catch(function(err) { res.status(400).send({ error: err.message }) });
 });
 
 /* log in code */
-/*app.get('/profile/:id', function(req, res) {
-    const username = req.body.username;
-    const password = req.body.password;
-    if (username && password) {
-        connection.query('SELECT * FROM students WHERE id = ? username = ? AND password = ?', [id, username, password], function(error, results, fields) {
-            if (results.length > 0) {
-                req.session.loggedin = true;
-                req.session.id=id;
-                req.session.username = username;
-                res.redirect('/profile');
-            } else {
-                res.send('Incorrect Username and/or Password!');
-            }           
-            res.end();
-        });
-    } else {
-        res.send('Please enter Username and Password!');
-        res.end();
-    }
+app.post('/profile/:username', function(req, res) {
+    const username=req.body.username;
+    const password=req.body.password;
+    return res.redirect(`/profile/${req.body.username}`);
 });
 
-/* 
+app.post('/teacher_profile/:username', function(req, res) {
+    const username=req.body.username;
+    const password=req.body.password;
+    return res.redirect(`/teacher_profile/${req.body.username}`);
+});
 
 
 
@@ -140,7 +189,7 @@ app.put('/profile', function(req,res) {
 
 
 
-*/
+
 /* renders form, new user create */
 app.get('/users/new', function(req,res) {
     return res.render('newUser');

@@ -70,7 +70,7 @@ html
       flex-direction: row;
       font-size: 30px;
       }
-      input[type="radio"]
+      input[type="checkbox"]
       {
       margin: auto 10px auto auto;
       }
@@ -130,22 +130,24 @@ html
         p PROGRESS: 
       a.right(href='/login') LOG OUT
     .bottom
-      .create
+      form(method="_POST" action="/redirect")
         h2.title CREATE AN EVENT
         .row
           p STRAND
-          input(type='radio')
+          input(type='checkbox', name='strand', value="Service")
           p  S 
-          input(type='radio')
+          input(type='checkbox', name='strand', value="Creativity")
           p  C 
-          input(type='radio')
+          input(type='checkbox', name='strand', value="Action")
           p  A 
         .row
-          input(type='text', placeholder='NAME of EVENT')
+          input(type='text', placeholder='NAME of EVENT', name="name")
         .row
-          textarea(placeholder='Write a Description of your event')
+          textarea(placeholder='Write a Description of your event', name="description")
+          input(type="date" name="date")
+          input(type="number" name="number_of_participants")
         button CREATE EVENT
-      .approved
+      // .approved
         h2.title APPROVED EVENTS
         .approved_event
           .row

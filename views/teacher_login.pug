@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title SCALE | LOGIN
+    title SCALE | TEACHER LOGIN
     style.
       body{
       height: 649px;
@@ -46,7 +46,7 @@ html
       #col1.column
         center
           img(src='public/pics/tao.png', height='130px', style='margin-top: 45px;')
-          form(method="POST" action=`/profile/${username}`)
+          form(method="POST" action=`/teacher_profile/${username}`)
             input(placeholder='USERNAME' name="username")
             input(placeholder='PASSWORD' name="password")
             p

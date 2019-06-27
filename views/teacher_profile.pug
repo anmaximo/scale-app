@@ -1,0 +1,208 @@
+doctype html
+html
+  head
+    title Teacher Profile
+    style(type='text/css').
+      body
+      {
+      height: 649px;
+      background: linear-gradient(to top left,rgb(2,254,254) 20%, rgb(1,201,177) 40%, rgb(0,66,55) 100%);
+      background: -webkit-linear-gradient(bottom right,rgb(2,254,254) 20%, rgb(1,201,177) 40%, rgb(0,66,55) 100%);
+      background: -o-linear-gradient(bottom right,rgb(2,254,254) 20%, rgb(1,201,177) 40%, rgb(0,66,55) 100%);
+      background: -moz-linear-gradient(bottom right, rgb(2,254,254) 20%, rgb(1,201,177) 40%, rgb(0,66,55) 100%);
+      display: flex;
+      flex-direction: column;
+      font-family: helvetica;
+      }
+      .top
+      {
+      display: flex;
+      flex-direction: row;
+      height: 75px;
+      width: 99.5%;
+      background-color: rgb(0,66,58);
+      margin: -1vw 0 0 -1vw;
+      padding: 1vw;
+      }
+      .top a
+      {
+      text-decoration: none;
+      color: white;
+      font-size: 30px;
+      margin: auto;
+      }
+      .top a:hover
+      {
+      color:rgb(2,254,206);
+      }
+      .top img
+      {
+      height:175px;
+      width: 175px;
+      }
+      .column
+      {
+      color: white;
+      font-size: 30px;
+      }
+      .bottom
+      {
+      margin-top: 100px;
+      text-align: center;
+      color: white;
+      display: flex;
+      flex-direction: row;
+      }
+      .create
+      {
+      height:500px;
+      width: 450px;
+      background-color: rgb(0,66,58);
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      padding:0 10px 10px 10px;
+      }
+      .title
+      {
+      margin-right: -150px;
+      margin-top: -20px;
+      }
+      .row
+      {
+      display: flex;
+      flex-direction: row;
+      font-size: 30px;
+      }
+      input[type="radio"]
+      {
+      margin: auto 10px auto auto;
+      }
+      input[type="text"]
+      {
+      width: 500px;
+      height: 30px;
+      border:none;
+      font-family: Helvetica;
+      text-align: center;
+      font-size: 30px;
+      border-bottom: 2px solid rgb(2,254,206);
+      color: rgb(2,254,206);
+      background: none;
+      }
+      textarea
+      {
+      margin: 20px 0 0 0;
+      align-self: center;
+      width: 500px;
+      height: 150px;
+      font-family: Helvetica;
+      border:none;
+      font-size: 20px;
+      background: rgb(2,254,206);
+      }
+      button
+      {
+      width: 200px;
+      height: 50px;
+      margin:auto;
+      font-size: 20px;
+      font-family: Helvetica;
+      border:none;
+      background: rgb(2,254,206);
+      }
+      .approved
+      {
+      width: 600px;
+      text-align: center;
+      }
+      .approved_event
+      {
+      min-height:400px;
+      width: 450px;
+      background-color: rgb(0,66,58);
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      padding:0 10px 10px 10px;
+      }
+      table
+      {
+      width: 1325px;
+      margin: auto auto auto 5px;
+      background-color: rgba(0,0,0,.5);
+      }
+      th
+      {
+      border:1px solid white;
+      }
+      tr
+      {
+      border-left:1px solid white;
+      }
+      ul, li
+      {
+      text-decoration: none;
+      list-style: none;
+      margin-left: -20px;
+      }
+  body
+    .top
+      img(src='pics/logo.png')
+      .column
+        p(style='margin-bottom: -35px; margin-top: 25px;') #{teachers.first_name} #{teachers.last_name}
+      a.right(href='/teacher_login') LOG OUT
+    .bottom
+      .container
+        form()
+        h2 Student Progress
+        table.table.table-condensed
+          thead
+            tr
+              th Student Name
+              th Event Name
+              th Event Description
+              th Event Strand
+              th Event Status
+          tbody
+            tr
+              td Irish Arriana Jimenez
+              td Art Gallery
+              td A gallery of my portraits; @Auditorium
+              td Creativity
+              td
+                label.container
+                  a(href=`/event1approved`) Approve  
+                  span.checkmark
+            tr
+              td Rochelle Sanares
+              td Outreach Program
+              td To help the children of our wonderful future, @Tagongtong Elementary School
+              td 
+                ul
+                    li
+                      | Service
+                    li
+                      | Action
+              td
+                label.container
+                  a(href=`/event2approved`) Approve  
+                  span.checkmark
+            tr
+              td Angelica Maximo
+              td Gallery of Galleries
+              td Art, Music, etc. @Gymnasium
+              td Creativity
+              td
+                label.container
+                  a(href=`/event3approved`) Approve  
+                  span.checkmark
+            tr
+              td Kyle Angelo Atole
+              td Volleyball Tournament
+              td Helping others become great volleyball players @Vball Court
+              td Action
+              td
+                label.container
+                  a(href=`/event4approved`) Approve  
+                  span.checkmark
