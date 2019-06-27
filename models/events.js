@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     approved_by: DataTypes.INTEGER
   }, {});
   events.associate = function(models) {
+    events.belongsTo(models.students,{foreignKey:"author_id"});
     // associations can be defined here
   };
   return events;

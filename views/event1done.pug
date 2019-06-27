@@ -149,8 +149,8 @@ html
   body
     .top
       .column
-        p(style='margin-bottom: -35px; margin-top: 25px;') #{teachers.first_name} #{teachers.last_name}
-      a.right(href='/') LOG OUT
+        p(style='margin-bottom: -35px; margin-top: 25px;') Beberly Del Rosario
+      a.right(href='/teacher_login') LOG OUT
     .bottom
       .container
         form()
@@ -167,17 +167,44 @@ html
               th Event Status
               th Actions
           tbody
-            each event in events
-              - var student = event.student || {}
-              tr
-                td= `${student.first_name} ${student.last_name}`
-                td= event.name
-                td= event.description
-                td= event.event_date
-                td= event.strand
-                td= event.number_of_participants
-                td= event.status
-                td
-                  label.container
-                    a(href=`/event1approved`) Approve  
-                    span.checkmark
+            tr
+              td Rochelle Sanares
+              td Outreach Program
+              td To help the children of our wonderful future, @Tagongtong
+              td 12-25-2021
+              td 
+                ul
+                    li
+                      | Service
+                    li
+                      | Action
+              td 25
+              td Approved
+              td
+                label.container
+                  a(href=`/event2approved`) Mark as Done
+                  span.checkmark
+            tr
+              td Kyle Angelo Atole
+              td Volleyball Tournament
+              td Helping others become great volleyball players @Vball Court
+              td 01-09-2022
+              td Action
+              td 12
+              td Approved
+              td
+                label.container
+                  a(href=`/event3approved`) Mark as Done  
+                  span.checkmark
+            tr
+              td Angelica Maximo
+              td Gallery of Galleries
+              td Art, Music, etc. @Gymnasium
+              td 05-20-2021
+              td Creativity
+              td 3
+              td Not Approved
+              td
+                label.container
+                  a(href=`/event3approved`) Approve  
+                  span.checkmark

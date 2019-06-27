@@ -1,9 +1,19 @@
 doctype html
 html
   head
+    meta(http-equiv='Refresh', content='5; url=/')
     title Redirect
+    style.
+      body{
+      height: 649px;
+      background: -webkit-linear-gradient(left top, rgb(255,255,255) 0%,rgb(2,254,254) 20%, rgb(1,201,177) 40%, rgb(0,66,55) 100%);
+      background: -o-linear-gradient(bottom right, rgb(255,255,255) 0%,rgb(2,254,254) 20%, rgb(1,201,177) 40%, rgb(0,66,55) 100%);
+      background: -moz-linear-gradient(bottom right, rgb(255,255,255) 0%,rgb(2,254,254) 20%, rgb(1,201,177) 40%, rgb(0,66,55) 100%);
+      background: linear-gradient(to bottom right, rgb(255,255,255) 0%,rgb(2,254,254) 20%, rgb(1,201,177) 40%, rgb(0,66,55) 100%);
+      margin-top: 10vw;
+      text-align: center;
+      }
   body
-    p You have successfully created an event #{events.name}
-    br
-    br
-    p Other students can join your event once your SCALE adviser approves it.
+      p You have successfully created an event #{events.name}
+      p Other students can join your event once your SCALE adviser approves it.
+      p Please wait 5 seconds to be redirected to the main page.

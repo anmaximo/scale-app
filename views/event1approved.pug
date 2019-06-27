@@ -148,7 +148,6 @@ html
       }
   body
     .top
-      img(src='pics/logo.png')
       .column
         p(style='margin-bottom: -35px; margin-top: 25px;') Beberly Del Rosario
       a.right(href='/teacher_login') LOG OUT
@@ -162,63 +161,62 @@ html
               th Student Name
               th Event Name
               th Event Description
+              th Event Date
               th Event Strand
+              th Number of Slots
               th Event Status
+              th Actions
           tbody
             tr
               td Irish Arriana Jimenez
               td Art Gallery
               td A gallery of my portraits; @Auditorium
+              td 03-04-2022
               td Creativity
+              td 3
+              td Approved
               td
                 label.container
-                  a Approved  
-                  span.checkmark
-                  || 
-                label.container
-                  a(href=`/event1done`) Done
+                  a(href=`/event1done`) Mark as Done
                   span.checkmark
             tr
               td Rochelle Sanares
               td Outreach Program
-              td To help the children of our wonderful future, @Tagongtong Elementary School
+              td To help the children of our wonderful future, @Tagongtong
+              td 12-25-2021
               td 
                 ul
                     li
                       | Service
                     li
                       | Action
+              td 25
+              td Approved
               td
                 label.container
-                  a(href=`/event2approved`) Approve  
-                  span.checkmark
-                  || 
-                label.container
-                  a(href=`/event2done`) Done
-                  span.checkmark
-            tr
-              td Angelica Maximo
-              td Gallery of Galleries
-              td Art, Music, etc. @Gymnasium
-              td Creativity
-              td
-                label.container
-                  a(href=`/event3approved`) Approve  
-                  span.checkmark
-                  || 
-                label.container
-                  a(href=`/event3done`) Done
+                  a(href=`/event2done`) Mark as Done
                   span.checkmark
             tr
               td Kyle Angelo Atole
               td Volleyball Tournament
               td Helping others become great volleyball players @Vball Court
+              td 01-09-2022
               td Action
+              td 12
+              td Approved
               td
                 label.container
-                  a(href=`/event4approved`) Approve  
+                  a(href=`/event3approved`) Mark as Done  
                   span.checkmark
-                  || 
+            tr
+              td Angelica Maximo
+              td Gallery of Galleries
+              td Art, Music, etc. @Gymnasium
+              td 05-20-2021
+              td Creativity
+              td 3
+              td Not Approved
+              td
                 label.container
-                  a(href=`/event4done`) Done
+                  a(href=`/event3approved`) Approve  
                   span.checkmark

@@ -55,31 +55,43 @@ app.get('/event1approved', function(req,res) {
 });
 
 app.get('/event1done', function(req,res) {
-    return res.render('signup');
+    return res.render('event1done');
 });
 
 app.get('/event2approved', function(req,res) {
-    return res.render('signup');
+    return res.render('event2approved');
 });
 
 app.get('/event2done', function(req,res) {
-    return res.render('signup');
+    return res.render('event2done');
 });
 
 app.get('/event3approved', function(req,res) {
-    return res.render('signup');
+    return res.render('event3approved');
 });
 
 app.get('/event3done', function(req,res) {
-    return res.render('signup');
+    return res.render('event3done');
 });
 
 app.get('/event4approved', function(req,res) {
-    return res.render('signup');
+    return res.render('event4approved');
 });
 
 app.get('/event4done', function(req,res) {
-    return res.render('signup');
+    return res.render('event4done');
+});
+
+app.get('/', function(req,res) {
+    return res.render('index');
+});
+
+app.get('/join1', function(req,res) {
+    return res.render('najoin si ayn');
+});
+
+app.get('/join2', function(req,res) {
+    return res.render('najoin si micha');
 });
 
 /* after sign up */
@@ -95,8 +107,11 @@ app.get('/profile/:username', function(req,res) {
 app.get('/teacher_profile/:username', function(req,res) {
     Teacher.findOne({where: {username: req.params.username}})
         .then(function(teachers) {
-            console.log(teachers.toJSON());
-            return res.render('teacher_profile', { teachers:teachers.toJSON() })
+            Event.findAll({include:[Student]})
+                .then(function(events){
+                    console.log(events[0].toJSON())
+                    return res.render('teacher_profile', { teachers:teachers.toJSON(), events:events })
+                })
         })
         .catch(function(err) { console.log(err) });
 });
@@ -128,6 +143,7 @@ app.get('/redirect', function(req,res) {
 });
 
 app.post('/redirect', function(req,res) {
+    console.log(req.body);
     const event_ = Event.build({  
         strand: req.body.strand,
         name: req.body.name,
@@ -155,40 +171,6 @@ app.post('/teacher_profile/:username', function(req, res) {
     const password=req.body.password;
     return res.redirect(`/teacher_profile/${req.body.username}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* renders form, new user create */
 app.get('/users/new', function(req,res) {
