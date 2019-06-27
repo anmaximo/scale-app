@@ -40,6 +40,10 @@ app.get('/signup', function(req,res) {
     return res.render('signup');
 });
 
+app.get('/index', function(req,res) {
+    return res.render('index');
+});
+
 /* papuntang log in */
 app.get('/login', function(req,res) {
     return res.render('login');
@@ -98,8 +102,13 @@ app.get('/join2', function(req,res) {
 app.get('/profile/:username', function(req,res) {
     Student.findOne({where: {username: req.params.username}})
         .then(function(students) {
+            Event.findAll({where: {status: "Approved"}})
+                .then(function(events) {
+                            console.log(events[0].toJSON())
+                            return res.render('student_profile', { students:students.toJSON(),  events:events })
+                })
+
             console.log(students.toJSON());
-            return res.render('student_profile', { students:students.toJSON() })
         })
         .catch(function(err) { console.log(err) });
 });
@@ -251,3 +260,13 @@ sequelize.authenticate()
     .catch(function(err) {
     	console.log(err)
     });
+
+
+app.get('/student_profile/:username', function(req,res) {
+    Event.findAll({where: {status: "Approved"}})
+        .then(function(events) {
+                    console.log(events[0].toJSON())
+                    return res.render('student_profile', { events:events.toJSON()})
+        })
+        .catch(function(err) { console.log(err) });
+});
